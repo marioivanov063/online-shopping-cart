@@ -4,10 +4,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.bklvsc.shoppingcart.application.services.UserService;
 import org.bklvsc.shoppingcart.domain.entities.Cart;
 import org.bklvsc.shoppingcart.domain.port.out.CartRepository;
 import org.bklvsc.shoppingcart.domain.valueobjects.CartId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodId;
+import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
+import org.mockito.ArgumentMatchers;
 import org.springframework.boot.autoconfigure.jms.artemis.ArtemisAutoConfiguration;
 import org.springframework.stereotype.Repository;
 
@@ -25,14 +28,15 @@ public class CartRepositoryImpl implements CartRepository{
 
 	@Override
 	public Cart saveCart(Cart cart) {
-		this.carts.add(cart);
+		carts.remove(cart);
+		carts.add(cart);
 		return cart;
 	}
 
 
 	@Override
 	public Collection<Cart> getCarts() {
-		// TODO Auto-generated method stub
-		return null;
+		return carts;
 	}
+
 }

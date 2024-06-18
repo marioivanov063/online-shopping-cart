@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.bklvsc.shoppingcart.application.exceptions.FoodNotFoundException;
 import org.bklvsc.shoppingcart.application.services.CartService;
+import org.bklvsc.shoppingcart.application.services.UserService;
 import org.bklvsc.shoppingcart.domain.entities.Food;
 import org.bklvsc.shoppingcart.domain.port.in.commands.CommandHandler;
 import org.bklvsc.shoppingcart.domain.port.in.commands.RemoveFoodCommand;
@@ -14,12 +15,12 @@ import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
 
 public class RemoveFoodCommandHandler implements CommandHandler<RemoveFoodCommand, Boolean>{
 	private FoodRepository foodRepository;
-	private CartService cartService;
+	private UserService userService;
 	
-	private RemoveFoodCommandHandler(FoodRepository foodRepository, CartService cartService) {
+	private RemoveFoodCommandHandler(FoodRepository foodRepository, UserService userService) {
 		super();
 		this.foodRepository = foodRepository;
-		this.cartService = cartService;
+		this.userService = userService;
 	}
 
 	@Override
@@ -27,10 +28,10 @@ public class RemoveFoodCommandHandler implements CommandHandler<RemoveFoodComman
 		FoodName foodName = new FoodName(command.foodName());
 		Optional<Food> food = foodRepository.getFood(foodName);
 		if(food.isEmpty())
-	        return Boolean.FALSE;	
+	        return false;	
 		
-		cartService.removeFoodFromCarts(foodName);
-		return Boolean.TRUE;
+		userService.removeFoodFromEveryCart(foodName);
+		return true;
 	}
 
 }

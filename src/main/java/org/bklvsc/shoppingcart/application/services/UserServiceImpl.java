@@ -7,6 +7,7 @@ import org.bklvsc.shoppingcart.domain.port.out.CartRepository;
 import org.bklvsc.shoppingcart.domain.port.out.UserRepository;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
 import org.bklvsc.shoppingcart.domain.valueobjects.UserId;
+import org.mockito.ArgumentMatchers;
 
 public class UserServiceImpl implements UserService{
 	private CartRepository cartRepository;
@@ -30,21 +31,35 @@ public class UserServiceImpl implements UserService{
         }
         
         cart = cartRepository.getCart(user.getCartId());
-        return cart.addFood(foodName);
+        boolean added = cart.addFood(foodName);
+        if(added)
+        	cartRepository.saveCart(cart);
+        return added;
 	}
 
 	@Override
 	public Boolean removeFoodFromUsersCart(FoodName foodName, UserId userId) {
 		User user = userRepository.getUser(userId)
 				.orElseThrow(() -> new UserNotFoundException());
+		return removeFoodFromUsersCart(foodName, user);
+	}
+
+	@Override
+	public void removeFoodFromEveryCart(FoodName name) {
+		userRepository.getAllUsers()
+			.forEach(user -> this.removeFoodFromUsersCart(name, user));
+	}
+	
+	private Boolean removeFoodFromUsersCart(FoodName foodName, User user) {
 		if(user.getCartId() == null)
         	return Boolean.FALSE;
         Cart cart = cartRepository.getCart(user.getCartId());
-        
         Boolean remove = cart.removeFood(foodName);
-        if(cart.getFoods().size() == 0)
+        cartRepository.saveCart(cart);
+        if(cart.getFoods().size() == 0) {
         	user.assignCart(null);
-        return remove;	
+        	userRepository.saveUser(user);
+        }      	
+        return remove;
 	}
-
 }

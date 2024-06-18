@@ -21,8 +21,11 @@ public class FoodRepositoryImpl implements FoodRepository{
 	}
 
 	@Override
-	public boolean saveFood(Food food) {
-		return foods.add(food);
+	public Food saveFood(Food food) {
+		foods.remove(food);
+		foods.add(food);
+		return food;
+		
 	}
 
 }

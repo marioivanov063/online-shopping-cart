@@ -7,5 +7,5 @@ import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
 
 public interface FoodRepository {
 	public Optional<Food> getFood(FoodName name);
-	public boolean saveFood(Food food);
+	public Food saveFood(Food food);
 }

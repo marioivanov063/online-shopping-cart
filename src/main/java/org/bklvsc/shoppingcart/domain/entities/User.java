@@ -3,6 +3,7 @@ package org.bklvsc.shoppingcart.domain.entities;
 import java.util.Objects;
 
 import org.bklvsc.shoppingcart.domain.valueobjects.CartId;
+import org.bklvsc.shoppingcart.domain.valueobjects.FoodId;
 import org.bklvsc.shoppingcart.domain.valueobjects.UserId;
 
 public class User{

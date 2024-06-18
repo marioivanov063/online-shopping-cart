@@ -32,7 +32,8 @@ public class TestCart {
 	@Test
 	public void TestRemoveFood() {
 		cart.removeFood(new FoodName("Baklava"));
-		Assertions.assertTrue(cart.getFoods().size() == 0);
+		Assertions.assertTrue(cart.getFoods().isEmpty());
+		Assertions.assertTrue(!cart.removeFood(new FoodName("Baklava")));
 	}
 	
 	@Test

@@ -1,42 +1,52 @@
 package org.bklvsc.shoppingcart.domain.entities;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import org.bklvsc.shoppingcart.domain.commons.Identity;
 import org.bklvsc.shoppingcart.domain.valueobjects.CartId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
+import org.mockito.ArgumentMatchers;
 
 public class Cart{
 	private CartId cartId;
-	private Set<FoodName> foods;
+	private Map<FoodName, Integer> foods;
 
-	private Cart(CartId cartId, Set<FoodName> foods) {
+	private Cart(CartId cartId, Map<FoodName, Integer> foods) {
 		super();
 		this.cartId = cartId;
 		this.foods = foods;
 	}
 	
 	public static Cart with(FoodName foodName) {
-		Set<FoodName> foods = new HashSet<>();
-		foods.add(foodName);
+		Map<FoodName, Integer> foods = new ConcurrentHashMap<>();
+		foods.put(foodName, 1);
 		return new Cart(CartId.createNewId(), foods);
 	}
 	
-	public Set<FoodName> getFoods(){
+	public Map<FoodName, Integer> getFoods(){
 		return this.foods;
 	}
 	
 	public boolean addFood(FoodName food) {
-		return this.foods.add(food);
+		this.foods.merge(food, 1, Integer::sum);
+		return true;
 	}
 	
 	public boolean removeFood(FoodName food) {
-		return this.foods.remove(food);
+		if(!this.foods.containsKey(food))
+			return false;
+		this.foods.put(food, foods.get(food) - 1);
+		if(this.foods.get(food) == 0)
+			this.foods.remove(food);
+		return true;
 	}
 
 	public CartId getCartId() {
