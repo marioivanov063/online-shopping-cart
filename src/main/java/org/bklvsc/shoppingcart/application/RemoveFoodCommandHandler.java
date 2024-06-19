@@ -8,16 +8,17 @@ import org.bklvsc.shoppingcart.application.services.UserService;
 import org.bklvsc.shoppingcart.domain.entities.Food;
 import org.bklvsc.shoppingcart.domain.port.in.commands.CommandHandler;
 import org.bklvsc.shoppingcart.domain.port.in.commands.RemoveFoodCommand;
-import org.bklvsc.shoppingcart.domain.port.out.CartRepository;
-import org.bklvsc.shoppingcart.domain.port.out.FoodRepository;
+import org.bklvsc.shoppingcart.domain.port.out.read.FoodReadRepository;
+import org.bklvsc.shoppingcart.domain.port.out.write.CartWriteRepository;
+import org.bklvsc.shoppingcart.domain.port.out.write.FoodWriteRepository;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
 
 public class RemoveFoodCommandHandler implements CommandHandler<RemoveFoodCommand, Boolean>{
-	private FoodRepository foodRepository;
+	private FoodReadRepository foodRepository;
 	private UserService userService;
 	
-	private RemoveFoodCommandHandler(FoodRepository foodRepository, UserService userService) {
+	private RemoveFoodCommandHandler(FoodReadRepository foodRepository, UserService userService) {
 		super();
 		this.foodRepository = foodRepository;
 		this.userService = userService;

@@ -1,4 +1,4 @@
-package org.bklvsc.shoppingcart;
+package org.bklvsc.shoppingcart.config;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

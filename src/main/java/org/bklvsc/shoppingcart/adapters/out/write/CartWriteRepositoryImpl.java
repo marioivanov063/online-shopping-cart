@@ -1,12 +1,14 @@
-package org.bklvsc.shoppingcart.adapters.out;
+package org.bklvsc.shoppingcart.adapters.out.write;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.bklvsc.shoppingcart.adapters.out.common.Carts;
+import org.bklvsc.shoppingcart.application.services.CartService;
 import org.bklvsc.shoppingcart.application.services.UserService;
 import org.bklvsc.shoppingcart.domain.entities.Cart;
-import org.bklvsc.shoppingcart.domain.port.out.CartRepository;
+import org.bklvsc.shoppingcart.domain.port.out.write.CartWriteRepository;
 import org.bklvsc.shoppingcart.domain.valueobjects.CartId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
@@ -15,28 +17,13 @@ import org.springframework.boot.autoconfigure.jms.artemis.ArtemisAutoConfigurati
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CartRepositoryImpl implements CartRepository{
-	static Set<Cart> carts = new HashSet<>();
-	@Override
-	public Cart getCart(CartId cartId) {
-		return carts.stream()
-				.filter(cart -> cart.getCartId()
-				.equals(cartId))
-				.findAny().orElse(null);
-	}
-
+class CartWriteRepositoryImpl implements CartWriteRepository{
 
 	@Override
 	public Cart saveCart(Cart cart) {
-		carts.remove(cart);
-		carts.add(cart);
+		Carts.carts.remove(cart);
+		Carts.carts.add(cart);
 		return cart;
-	}
-
-
-	@Override
-	public Collection<Cart> getCarts() {
-		return carts;
 	}
 
 }

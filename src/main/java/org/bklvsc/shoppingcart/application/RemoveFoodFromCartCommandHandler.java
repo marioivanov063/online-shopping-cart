@@ -11,18 +11,19 @@ import org.bklvsc.shoppingcart.domain.entities.Food;
 import org.bklvsc.shoppingcart.domain.entities.User;
 import org.bklvsc.shoppingcart.domain.port.in.commands.CommandHandler;
 import org.bklvsc.shoppingcart.domain.port.in.commands.RemoveFoodFromCartCommand;
-import org.bklvsc.shoppingcart.domain.port.out.CartRepository;
-import org.bklvsc.shoppingcart.domain.port.out.FoodRepository;
-import org.bklvsc.shoppingcart.domain.port.out.UserRepository;
+import org.bklvsc.shoppingcart.domain.port.out.read.FoodReadRepository;
+import org.bklvsc.shoppingcart.domain.port.out.write.CartWriteRepository;
+import org.bklvsc.shoppingcart.domain.port.out.write.FoodWriteRepository;
+import org.bklvsc.shoppingcart.domain.port.out.write.UserWriteRepository;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
 import org.bklvsc.shoppingcart.domain.valueobjects.UserId;
 
 public class RemoveFoodFromCartCommandHandler implements CommandHandler<RemoveFoodFromCartCommand, Boolean>{
-	private FoodRepository foodRepository;
+	private FoodReadRepository foodRepository;
 	private UserService userService;
 	
-	public RemoveFoodFromCartCommandHandler(FoodRepository foodRepository, UserService userService) {
+	public RemoveFoodFromCartCommandHandler(FoodReadRepository foodRepository, UserService userService) {
 		super();
 		this.foodRepository = foodRepository;
 		this.userService = userService;
