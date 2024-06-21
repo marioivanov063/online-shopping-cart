@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 class FoodWriteRepositoryImpl implements FoodWriteRepository{
+
 	@Override
 	public Food saveFood(Food food) {
 		Foods.foods.remove(food);
@@ -26,4 +27,8 @@ class FoodWriteRepositoryImpl implements FoodWriteRepository{
 		return Foods.foods;
 	}
 
+	@Override
+	public boolean removeFood(Food food) {
+		return Foods.foods.remove(food);
+	}
 }

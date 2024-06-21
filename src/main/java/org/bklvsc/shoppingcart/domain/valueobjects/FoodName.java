@@ -2,7 +2,7 @@ package org.bklvsc.shoppingcart.domain.valueobjects;
 
 import java.util.Objects;
 
-import org.bklvsc.shoppingcart.domain.entities.User;
+import org.bklvsc.shoppingcart.domain.user.User;
 
 public record FoodName(String name) {
 	public FoodName{

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.bklvsc.shoppingcart.domain.entities.Cart;
-import org.bklvsc.shoppingcart.domain.valueobjects.CartId;
+import org.bklvsc.shoppingcart.domain.user.valueobjects.CartId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
 

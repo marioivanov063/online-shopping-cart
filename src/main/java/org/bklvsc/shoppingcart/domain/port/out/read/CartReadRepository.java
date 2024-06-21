@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.bklvsc.shoppingcart.domain.entities.Cart;
-import org.bklvsc.shoppingcart.domain.valueobjects.CartId;
+import org.bklvsc.shoppingcart.domain.user.valueobjects.CartId;
 
 public interface CartReadRepository {
 	Cart getCart(CartId cartId);

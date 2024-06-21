@@ -1,4 +1,4 @@
-package org.bklvsc.shoppingcart.application;
+package org.bklvsc.shoppingcart.application.commands;
 
 import java.util.Optional;
 
@@ -16,12 +16,14 @@ import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
 
 public class RemoveFoodCommandHandler implements CommandHandler<RemoveFoodCommand, Boolean>{
 	private FoodReadRepository foodRepository;
+	private FoodWriteRepository foodWriteRepository;
 	private UserService userService;
 	
-	private RemoveFoodCommandHandler(FoodReadRepository foodRepository, UserService userService) {
+	private RemoveFoodCommandHandler(FoodReadRepository foodRepository, UserService userService, FoodWriteRepository foodWriteRepository) {
 		super();
 		this.foodRepository = foodRepository;
 		this.userService = userService;
+		this.foodWriteRepository = foodWriteRepository;
 	}
 
 	@Override
@@ -30,7 +32,7 @@ public class RemoveFoodCommandHandler implements CommandHandler<RemoveFoodComman
 		Optional<Food> food = foodRepository.getFood(foodName);
 		if(food.isEmpty())
 	        return false;	
-		
+		foodWriteRepository.removeFood(food.get());
 		userService.removeFoodFromEveryCart(foodName);
 		return true;
 	}

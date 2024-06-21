@@ -1,10 +1,10 @@
-package org.bklvsc.shoppingcart.domain.entities;
+package org.bklvsc.shoppingcart.domain.user;
 
 import java.util.Objects;
 
-import org.bklvsc.shoppingcart.domain.valueobjects.CartId;
+import org.bklvsc.shoppingcart.domain.user.valueobjects.CartId;
+import org.bklvsc.shoppingcart.domain.user.valueobjects.UserId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodId;
-import org.bklvsc.shoppingcart.domain.valueobjects.UserId;
 
 public class User{
 	private UserId userId;

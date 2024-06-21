@@ -9,4 +9,5 @@ import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
 public interface FoodWriteRepository {
 	Food saveFood(Food food);
 	Collection<Food> getFoods();
+	boolean removeFood(Food food);
 }

@@ -2,13 +2,13 @@ package org.bklvsc.shoppingcart.application.services;
 
 import org.bklvsc.shoppingcart.application.exceptions.UserNotFoundException;
 import org.bklvsc.shoppingcart.domain.entities.Cart;
-import org.bklvsc.shoppingcart.domain.entities.User;
 import org.bklvsc.shoppingcart.domain.port.out.read.CartReadRepository;
 import org.bklvsc.shoppingcart.domain.port.out.read.UserReadRepository;
 import org.bklvsc.shoppingcart.domain.port.out.write.CartWriteRepository;
 import org.bklvsc.shoppingcart.domain.port.out.write.UserWriteRepository;
+import org.bklvsc.shoppingcart.domain.user.User;
+import org.bklvsc.shoppingcart.domain.user.valueobjects.UserId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
-import org.bklvsc.shoppingcart.domain.valueobjects.UserId;
 import org.mockito.ArgumentMatchers;
 import org.springframework.stereotype.Service;
 

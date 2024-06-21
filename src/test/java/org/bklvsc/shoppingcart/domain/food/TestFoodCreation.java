@@ -34,8 +34,8 @@ public class TestFoodCreation {
 	
 	@Test
 	public void TestEquality() {
-		Food food = Food.createFood(new FoodName("baklava"), new FoodPrice(3));
-		Food food1 = Food.createFood(new FoodName("baklav"), new FoodPrice(3));
+		Food food = Food.createFood("baklava", 5, 1);
+		Food food1 = Food.createFood("baklav", 5, 1);
 		Assertions.assertTrue(!food.equals(food1));
 	}
 }

@@ -1,4 +1,4 @@
-package org.bklvsc.shoppingcart.domain.valueobjects;
+package org.bklvsc.shoppingcart.domain.user.valueobjects;
 
 import org.bklvsc.shoppingcart.domain.commons.Identity;
 

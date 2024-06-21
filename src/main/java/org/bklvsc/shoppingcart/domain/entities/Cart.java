@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import org.bklvsc.shoppingcart.domain.commons.Identity;
-import org.bklvsc.shoppingcart.domain.valueobjects.CartId;
+import org.bklvsc.shoppingcart.domain.user.valueobjects.CartId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodId;
 import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
 import org.mockito.ArgumentMatchers;
