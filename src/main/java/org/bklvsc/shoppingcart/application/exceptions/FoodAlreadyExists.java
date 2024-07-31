@@ -1,6 +1,6 @@
 package org.bklvsc.shoppingcart.application.exceptions;
 
-import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
+import org.bklvsc.shoppingcart.domain.food.valueobjects.FoodName;
 
 public class FoodAlreadyExists extends IllegalArgumentException{
 	private FoodName name;

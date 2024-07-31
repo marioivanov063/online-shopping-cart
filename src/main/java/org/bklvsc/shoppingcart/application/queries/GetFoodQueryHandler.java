@@ -1,14 +1,15 @@
 package org.bklvsc.shoppingcart.application.queries;
 
-import org.bklvsc.shoppingcart.domain.entities.Food;
+import org.bklvsc.shoppingcart.domain.food.FoodDomainModel;
+import org.bklvsc.shoppingcart.domain.food.valueobjects.FoodName;
 import org.bklvsc.shoppingcart.domain.port.in.queries.GetFoodQuery;
 import org.bklvsc.shoppingcart.domain.port.in.queries.QueryHandler;
 import org.bklvsc.shoppingcart.domain.port.in.queries.dtos.FoodDto;
 import org.bklvsc.shoppingcart.domain.port.out.read.FoodReadRepository;
-import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
 
-public class GetFoodQueryHandler implements QueryHandler<GetFoodQuery, FoodDto>{
-	private FoodReadRepository foodReadRepository;
+
+public class GetFoodQueryHandler /*implements QueryHandler<GetFoodQuery, FoodDto>*/{
+	/*private FoodReadRepository foodReadRepository;
 	
 	public GetFoodQueryHandler(FoodReadRepository foodReadRepository) {
 		this.foodReadRepository = foodReadRepository;
@@ -22,6 +23,6 @@ public class GetFoodQueryHandler implements QueryHandler<GetFoodQuery, FoodDto>{
 									 food.getFoodPrice().price(), 
 									 food.getFoodQuantity().quantity()))
 				.orElse(null);
-	}
+	}*/
 
 }

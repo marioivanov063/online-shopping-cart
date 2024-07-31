@@ -7,22 +7,29 @@ import org.bklvsc.shoppingcart.domain.port.in.queries.GetFoodsQuery;
 import org.bklvsc.shoppingcart.domain.port.in.queries.QueryHandler;
 import org.bklvsc.shoppingcart.domain.port.in.queries.dtos.FoodDto;
 import org.bklvsc.shoppingcart.domain.port.out.read.FoodReadRepository;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GetFoodsQueryHandler implements QueryHandler<GetFoodsQuery, List<FoodDto>>{
-	private FoodReadRepository foodReadRepository;
+	private JdbcTemplate template;
 	
-	public GetFoodsQueryHandler(FoodReadRepository foodReadRepository) {
-		this.foodReadRepository = foodReadRepository;
+	public GetFoodsQueryHandler(JdbcTemplate template) {
+		this.template = template;
 	}
-
+	
 	@Override
 	public List<FoodDto> handle(GetFoodsQuery query) {
-		return this.foodReadRepository.getFoods().stream()
-			.map(food -> new FoodDto(food.getFoodName().name(), 
-									 food.getFoodPrice().price(),
-									 food.getFoodQuantity().quantity()))
-			.collect(Collectors.toList());
-				
+		String sql = "SELECT * FROM food";
+		List<FoodDto> foods = this.template.query(
+				sql,
+				(rs, rn) -> new FoodDto(
+								rs.getString(1), 
+						 		rs.getDouble(2),
+						 		rs.getString(3)
+						 	)
+		);
+		return foods;		
 	}
 
 }

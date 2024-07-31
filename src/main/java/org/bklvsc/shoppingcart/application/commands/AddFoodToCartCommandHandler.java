@@ -1,38 +1,39 @@
 package org.bklvsc.shoppingcart.application.commands;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.bklvsc.shoppingcart.application.exceptions.FoodNotFoundException;
-import org.bklvsc.shoppingcart.application.exceptions.NoCartException;
 import org.bklvsc.shoppingcart.application.exceptions.UserNotFoundException;
-import org.bklvsc.shoppingcart.application.services.UserService;
-import org.bklvsc.shoppingcart.domain.entities.Cart;
-import org.bklvsc.shoppingcart.domain.entities.Food;
+import org.bklvsc.shoppingcart.application.services.UserCartService;
+import org.bklvsc.shoppingcart.domain.food.FoodDomainBehaviour;
+import org.bklvsc.shoppingcart.domain.food.FoodDomainModel;
+import org.bklvsc.shoppingcart.domain.food.valueobjects.FoodName;
 import org.bklvsc.shoppingcart.domain.port.in.commands.AddFoodToCartCommand;
 import org.bklvsc.shoppingcart.domain.port.in.commands.CommandHandler;
-import org.bklvsc.shoppingcart.domain.port.out.read.FoodReadRepository;
-import org.bklvsc.shoppingcart.domain.port.out.write.CartWriteRepository;
-import org.bklvsc.shoppingcart.domain.port.out.write.FoodWriteRepository;
-import org.bklvsc.shoppingcart.domain.port.out.write.UserWriteRepository;
-import org.bklvsc.shoppingcart.domain.user.User;
+import org.bklvsc.shoppingcart.domain.port.out.write.FoodRepository;
+import org.bklvsc.shoppingcart.domain.port.out.write.UserRepository;
+import org.bklvsc.shoppingcart.domain.user.UserDomainBehaviour;
 import org.bklvsc.shoppingcart.domain.user.valueobjects.UserId;
-import org.bklvsc.shoppingcart.domain.valueobjects.FoodName;
+import org.mockito.ArgumentMatchers;
+import org.springframework.stereotype.Service;
 
-public class AddFoodToCartCommandHandler implements CommandHandler<AddFoodToCartCommand, Boolean>{
-	private FoodReadRepository foodRepository;
-	private UserService userService;
+@Service
+public class AddFoodToCartCommandHandler implements CommandHandler<AddFoodToCartCommand, Void>{
+	private FoodRepository foodRepository;
+	private UserRepository userRepository;
+	private UserCartService userCartService;
 		
-	public AddFoodToCartCommandHandler(FoodReadRepository foodRepository, UserService userService) {
+	public AddFoodToCartCommandHandler(FoodRepository foodRepository, UserCartService userCartService, UserRepository userRepository) {
+		this.userCartService = userCartService;
+		this.userRepository = userRepository;
 		this.foodRepository = foodRepository;
 	}	
 	@Override
-	public Boolean handle(AddFoodToCartCommand command) {
-		UserId userId = UserId.from(command.userId());
+	public Void handle(AddFoodToCartCommand command) {
+		UserId userId = new UserId(command.userId());
 		FoodName foodName = new FoodName(command.foodName());
-        Food food = foodRepository.getFood(foodName)
-        		.orElseThrow(() -> new FoodNotFoundException());     
-        return userService.addFoodToUsersCart(foodName, userId);
-   
+        /*FoodDomainBehaviour food = foodRepository.getFood(foodName)
+        		.orElseThrow(FoodNotFoundException::new); */
+        UserDomainBehaviour user = userRepository.getUser(userId)
+        		.orElseThrow(UserNotFoundException::new); 
+        userCartService.addFoodToUsersCart(foodName, user);
+        return null;
 	}
 }

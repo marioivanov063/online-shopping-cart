@@ -1,21 +1,18 @@
 package org.bklvsc.shoppingcart.domain.user.valueobjects;
 
+import java.util.UUID;
+
 import org.bklvsc.shoppingcart.domain.commons.Identity;
 
+import net.bytebuddy.asm.Advice.This;
+
 public class UserId extends Identity{
-	private UserId(String string) {
-		super(string);
-	}
 	
-	private UserId() {
+	public UserId() {
 		super();
 	}
-
-	public static UserId from(String string) {
-		return new UserId(string);
-	}
 	
-	public static UserId createNewId() {
-		return new UserId();
+	public UserId(String string) {
+		super(string);
 	}
 }

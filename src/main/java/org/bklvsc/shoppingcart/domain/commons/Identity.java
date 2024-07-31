@@ -1,29 +1,38 @@
 package org.bklvsc.shoppingcart.domain.commons;
 
+import java.io.Serializable;
+import java.nio.ByteBuffer;
 import java.util.Objects;
 import java.util.UUID;
 
+import org.mockito.ArgumentMatchers;
+
 
 public abstract class Identity{
-	private final UUID id;
+	private UUID id;
+	
+	public UUID getId() {
+		return id;
+	}
+	
+	protected Identity(String string) {
+		if(string != null)
+			this.id = UUID.fromString(string);
+	}
 
 	protected Identity() {
-		this.id = createId();
+		this.id = UUID.randomUUID();
 	}
 	
-	protected Identity(String id) {
-		this.id = UUID.fromString(id);
+	protected Identity(UUID uuid) {
+		this.id = uuid;
 	}
-	
-	public UUID createId() {
-		return UUID.randomUUID();
-	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -32,7 +41,14 @@ public abstract class Identity{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Identity other = (Identity) obj;
+		 Identity other = (Identity) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	@Override
+	public String toString() {
+		return this.id.toString();
+	}
+	
+	
 }

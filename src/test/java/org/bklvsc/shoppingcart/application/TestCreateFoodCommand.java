@@ -2,75 +2,79 @@ package org.bklvsc.shoppingcart.application;
 
 import java.util.List;
 
+import org.bklvsc.shoppingcart.adapters.out.write.FoodRepositoryImpl;
 import org.bklvsc.shoppingcart.application.commands.CreateFoodCommandHandler;
 import org.bklvsc.shoppingcart.application.exceptions.FoodAlreadyExists;
-import org.bklvsc.shoppingcart.application.queries.GetFoodQueryHandler;
 import org.bklvsc.shoppingcart.application.queries.GetFoodsQueryHandler;
-import org.bklvsc.shoppingcart.domain.entities.Food;
 import org.bklvsc.shoppingcart.domain.port.in.commands.CreateFoodCommand;
-import org.bklvsc.shoppingcart.domain.port.in.queries.GetFoodQuery;
+
 import org.bklvsc.shoppingcart.domain.port.in.queries.GetFoodsQuery;
 import org.bklvsc.shoppingcart.domain.port.in.queries.dtos.FoodDto;
 import org.bklvsc.shoppingcart.domain.port.out.read.FoodReadRepository;
-import org.bklvsc.shoppingcart.domain.port.out.write.FoodWriteRepository;
+import org.bklvsc.shoppingcart.domain.port.out.write.FoodRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
+@ActiveProfiles(value = "test")
 public class TestCreateFoodCommand {
+	@Value("${spring.datasource.url}")
+    private String propertyString;
 	@Autowired
 	private CreateFoodCommandHandler createFoodCommandHandler;
 	@Autowired
 	private GetFoodsQueryHandler getFoodsQueryHandler;
+	
+	@Test
+	public void testValueForProperty() {
+		Assertions.assertEquals("jdbc:mysql://localhost:5222/shopping_cart_test", propertyString);
+	}
 			
 	@Test
 	public void TestCreateSameFoodTwice() {
 		
-		Food baklava = createFoodCommandHandler
-				.handle(new CreateFoodCommand("baklava", 5.5, 1));
+		createFoodCommandHandler
+			.handle(new CreateFoodCommand("baklava", 5.5));
 		
 		Assertions.assertThrows(FoodAlreadyExists.class, 
 				() -> createFoodCommandHandler
-						.handle(new CreateFoodCommand("Baklava", 5.5, 2)));
+						.handle(new CreateFoodCommand("Baklava", 5.5)));
 		
 		Assertions.assertThrows(IllegalArgumentException.class, 
 				() -> createFoodCommandHandler
-					.handle(new CreateFoodCommand("ba", 2, 1)));
+					.handle(new CreateFoodCommand("ba", 2)));
 		
-		Food chocolate = createFoodCommandHandler.handle(new CreateFoodCommand("chocolate", 4, 3));
+		createFoodCommandHandler
+			.handle(new CreateFoodCommand("chocolate", 4));
 		
 		List<FoodDto> foods = getFoodsQueryHandler.handle(new GetFoodsQuery());
 		Assertions.assertTrue(foods.size() == 2);
 	}
 	
-	@Configuration
-	@ComponentScan(basePackages = {"org.bklvsc.shoppingcart.application.services",
-								  "org.bklvsc.shoppingcart.adapters.out.read",
-								  "org.bklvsc.shoppingcart.adapters.out.write"})
+	/*@Configuration
+	@ComponentScan(basePackages = {"org.bklvsc.shoppingcart.adapters.out.write"})
 	static class ConfigurationClass {
-		FoodWriteRepository foodWriteRepository;
-		FoodReadRepository foodReadRepository;
-		
-		public ConfigurationClass(FoodWriteRepository foodWriteRepository, FoodReadRepository foodReadRepository) {
-			this.foodWriteRepository = foodWriteRepository;
-			this.foodReadRepository = foodReadRepository;
-		}
-
+		@Mock
+		JdbcTemplate jdbcTemplate;
 		@Bean
-		public CreateFoodCommandHandler addFoodToCartCommandHandler() {
-			return new CreateFoodCommandHandler(foodWriteRepository, foodReadRepository);
+		public CreateFoodCommandHandler addFoodToCartCommandHandler(FoodRepositoryImpl foodRepositoryImpl) {
+			return new CreateFoodCommandHandler(foodRepositoryImpl);
 		}
 		
 		@Bean
-		public GetFoodsQueryHandler getFoodsQueryHandler() {
-			return new GetFoodsQueryHandler(foodReadRepository);
+		public GetFoodsQueryHandler getFoodsQueryHandler(JdbcTemplate template) {
+			return new GetFoodsQueryHandler(template);
 		}
-	}	
+	}	*/
 }
 
 
