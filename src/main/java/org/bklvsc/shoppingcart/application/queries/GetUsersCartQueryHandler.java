@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bklvsc.shoppingcart.Utils;
-import org.bklvsc.shoppingcart.domain.port.in.queries.GetUsersCartQuery;
+import org.bklvsc.shoppingcart.domain.cart.application.dtos.queries.GetUsersCartQuery;
 import org.bklvsc.shoppingcart.domain.port.in.queries.QueryHandler;
 import org.bklvsc.shoppingcart.domain.port.in.queries.dtos.CartDto;
 import org.bklvsc.shoppingcart.domain.port.in.queries.dtos.FoodInCartDto;

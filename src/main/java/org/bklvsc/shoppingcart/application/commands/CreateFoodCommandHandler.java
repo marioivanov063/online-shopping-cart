@@ -1,12 +1,12 @@
 package org.bklvsc.shoppingcart.application.commands;
 
 import org.bklvsc.shoppingcart.application.exceptions.FoodAlreadyExists;
+import org.bklvsc.shoppingcart.domain.cart.application.ports.out.FoodRepository;
 import org.bklvsc.shoppingcart.domain.food.FoodDomainBehaviour;
 import org.bklvsc.shoppingcart.domain.food.valueobjects.FoodName;
 import org.bklvsc.shoppingcart.domain.food.valueobjects.FoodPrice;
 import org.bklvsc.shoppingcart.domain.port.in.commands.CommandHandler;
 import org.bklvsc.shoppingcart.domain.port.in.commands.CreateFoodCommand;
-import org.bklvsc.shoppingcart.domain.port.out.write.FoodRepository;
 import org.springframework.stereotype.Service;
 
 @Service

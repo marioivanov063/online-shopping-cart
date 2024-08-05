@@ -1,16 +1,16 @@
 package org.bklvsc.shoppingcart.application;
 
-import org.bklvsc.shoppingcart.application.commands.AddFoodToCartCommandHandler;
 import org.bklvsc.shoppingcart.application.commands.CreateFoodCommandHandler;
 import org.bklvsc.shoppingcart.application.commands.CreateUserCommandHandler;
-import org.bklvsc.shoppingcart.application.commands.RemoveFoodFromCartCommandHandler;
 import org.bklvsc.shoppingcart.application.exceptions.UserNotFoundException;
 import org.bklvsc.shoppingcart.application.queries.GetUsersCartQueryHandler;
-import org.bklvsc.shoppingcart.domain.port.in.commands.AddFoodToCartCommand;
+import org.bklvsc.shoppingcart.domain.cart.application.dtos.commands.AddFoodToCartCommand;
+import org.bklvsc.shoppingcart.domain.cart.application.dtos.commands.RemoveFoodFromCartCommand;
+import org.bklvsc.shoppingcart.domain.cart.application.dtos.queries.GetUsersCartQuery;
+import org.bklvsc.shoppingcart.domain.cart.application.services.AddFoodToCartCommandHandler;
+import org.bklvsc.shoppingcart.domain.cart.application.services.RemoveFoodFromCartCommandHandler;
 import org.bklvsc.shoppingcart.domain.port.in.commands.CreateFoodCommand;
 import org.bklvsc.shoppingcart.domain.port.in.commands.CreateUserCommand;
-import org.bklvsc.shoppingcart.domain.port.in.commands.RemoveFoodFromCartCommand;
-import org.bklvsc.shoppingcart.domain.port.in.queries.GetUsersCartQuery;
 import org.bklvsc.shoppingcart.domain.port.in.queries.dtos.CartDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

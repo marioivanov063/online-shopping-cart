@@ -1,4 +1,4 @@
-package org.bklvsc.shoppingcart.domain.user;
+package org.bklvsc.shoppingcart.domain.cart.domain_core.entities;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,18 +12,13 @@ public class UserDomainModel{
 	private UserName username;
 	private CartId cart;
 
-	UserDomainModel(String userId, String username, String cart) {
+	public UserDomainModel(String userId, String username, String cart) {
 		this.userId = new UserId(userId);
 		this.username = new UserName(username);
 		if(cart == null)
 			this.cart = null;
 		else
 			this.cart = new CartId(cart);
-	}
-	
-	UserDomainModel(UserId userId, UserName userName){
-		this.userId = userId;
-		this.username = userName;
 	}
 
 	void setCart(CartId cart) {

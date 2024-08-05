@@ -1,6 +1,6 @@
 package org.bklvsc.shoppingcart.domain.user;
 
-import org.bklvsc.shoppingcart.domain.cart.valueobjects.CartId;
+import org.bklvsc.shoppingcart.domain.cart.domain_core.valueobjects.CartId;
 import org.bklvsc.shoppingcart.domain.commons.AggregateRoot;
 import org.bklvsc.shoppingcart.domain.user.UserEvent.CartAssignedToUserEvent;
 import org.bklvsc.shoppingcart.domain.user.UserEvent.CartUnassignedFromUserEvent;

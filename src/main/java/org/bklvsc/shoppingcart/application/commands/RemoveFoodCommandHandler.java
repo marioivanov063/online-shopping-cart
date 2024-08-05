@@ -1,13 +1,14 @@
 package org.bklvsc.shoppingcart.application.commands;
 
 import java.util.Optional;
-import org.bklvsc.shoppingcart.application.services.UserCartService;
+
+import org.bklvsc.shoppingcart.domain.cart.application.ports.in.UserCartService;
+import org.bklvsc.shoppingcart.domain.cart.application.ports.out.FoodRepository;
+import org.bklvsc.shoppingcart.domain.cart.application.ports.out.UserRepository;
 import org.bklvsc.shoppingcart.domain.food.FoodDomainBehaviour;
 import org.bklvsc.shoppingcart.domain.food.valueobjects.FoodName;
 import org.bklvsc.shoppingcart.domain.port.in.commands.CommandHandler;
 import org.bklvsc.shoppingcart.domain.port.in.commands.RemoveFoodCommand;
-import org.bklvsc.shoppingcart.domain.port.out.write.FoodRepository;
-import org.bklvsc.shoppingcart.domain.port.out.write.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
