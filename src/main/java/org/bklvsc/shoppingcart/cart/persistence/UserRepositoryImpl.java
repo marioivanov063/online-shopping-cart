@@ -21,7 +21,10 @@ public class UserRepositoryImpl implements UserRepository{
 		this.template = template;
 	}
 
-
+	/*
+	 * Might not be needed as you wouldn't even be allowed execute cart commands
+	 * if the session is not valid
+	 */
 	@Override
 	public Optional<UserDomainModel> getUser(UUID userId) {
 		String sql = """	

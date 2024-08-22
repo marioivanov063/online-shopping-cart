@@ -5,19 +5,19 @@ import java.util.Objects;
 
 import org.bklvsc.shoppingcart.user.domain.entities.UserDomainModel;
 
-public record FoodName(String name) implements Serializable{
+public record FoodName(String value) implements Serializable{
 	public FoodName{
-		if(name == null)
+		if(value == null)
 			throw new IllegalArgumentException("Name cannot be null");
-		if(name.isBlank())
+		if(value.isBlank())
 			throw new IllegalArgumentException("Name cannot be blank");
-		if(name.length() < 3 || name.length() > 50)
+		if(value.length() < 3 || value.length() > 50)
 			throw new IllegalArgumentException("Name size has to be between 3 and 50");
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name.toLowerCase());
+		return Objects.hash(value.toLowerCase());
 	}
 
 	@Override
@@ -29,6 +29,6 @@ public record FoodName(String name) implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		FoodName other = (FoodName) obj;
-		return Objects.equals(name.toLowerCase(), other.name.toLowerCase());
+		return Objects.equals(value.toLowerCase(), other.value.toLowerCase());
 	}
 }

@@ -1,6 +1,8 @@
 package org.bklvsc.shoppingcart.commons.valueobjects;
 
-public record FoodQuantity(int value) {
+import java.io.Serializable;
+
+public record FoodQuantity(int value) implements Serializable{
 	public FoodQuantity{
 		if(value <= 0)
 			throw new IllegalArgumentException("Food quantity cannot be less or equal to zero");

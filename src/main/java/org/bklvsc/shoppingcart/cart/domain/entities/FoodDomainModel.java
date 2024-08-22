@@ -1,13 +1,14 @@
 package org.bklvsc.shoppingcart.cart.domain.entities;
 
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import org.bklvsc.shoppingcart.catalog.domain.valueobjects.FoodStockQuantity;
 import org.bklvsc.shoppingcart.commons.valueobjects.FoodName;
 import org.bklvsc.shoppingcart.commons.valueobjects.FoodPrice;
 
-public class FoodDomainModel{
+public class FoodDomainModel implements Serializable{
 	 private FoodName foodName;
 	 private FoodPrice foodPrice;
 	

@@ -1,5 +1,6 @@
 package org.bklvsc.shoppingcart.cart.application.services;
 
+import org.bklvsc.shoppingcart.cart.application.dtos.CartDto;
 import org.bklvsc.shoppingcart.cart.application.dtos.add_to_cart.AddFoodToCartCommand;
 import org.bklvsc.shoppingcart.cart.application.dtos.remove_from_cart.RemoveFoodFromCartCommand;
 import org.bklvsc.shoppingcart.cart.application.ports.in.UserCartService;
@@ -16,12 +17,12 @@ class UserCartServiceImpl implements UserCartService{
 	}
 
 	@Override
-	public void addFoodToUsersCart(AddFoodToCartCommand command) {
-		addFoodToCartCommandHandler.handle(command);
+	public CartDto addFoodToUsersCart(AddFoodToCartCommand command) {
+		return addFoodToCartCommandHandler.handle(command);
 	}
 	
 	@Override
-	public void removeFoodFromUsersCart(RemoveFoodFromCartCommand command) {
-		removeFoodFromCartCommandHandler.handle(command);
+	public CartDto removeFoodFromUsersCart(RemoveFoodFromCartCommand command) {
+		return removeFoodFromCartCommandHandler.handle(command);
 	}
 }

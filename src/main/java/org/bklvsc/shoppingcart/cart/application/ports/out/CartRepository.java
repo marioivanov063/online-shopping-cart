@@ -9,7 +9,6 @@ import org.bklvsc.shoppingcart.cart.domain.value_objects.CartId;
 import org.bklvsc.shoppingcart.commons.valueobjects.UserId;
 
 public interface CartRepository {
-	CartDomainModel save(CartDomainModel cart);
-	CartDomainModel getCart(UUID userId);
-	CartDomainModel remove(CartDomainModel cart);
+	CartDomainBehaviour save(CartDomainBehaviour cart);
+	CartDomainBehaviour getCart(UUID userId);
 }

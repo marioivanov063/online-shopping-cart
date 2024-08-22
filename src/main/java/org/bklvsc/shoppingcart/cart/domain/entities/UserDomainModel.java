@@ -1,4 +1,5 @@
 package org.bklvsc.shoppingcart.cart.domain.entities;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -7,7 +8,7 @@ import org.bklvsc.shoppingcart.commons.domain.AggregateRoot;
 import org.bklvsc.shoppingcart.commons.valueobjects.UserId;
 import org.bklvsc.shoppingcart.user.domain.valueobjects.UserName;
 
-public class UserDomainModel{
+public class UserDomainModel implements Serializable{
 	private UUID userId;
 	private UserName username;
 	private CartId cart;

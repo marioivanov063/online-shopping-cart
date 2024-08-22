@@ -1,5 +1,7 @@
 package org.bklvsc.shoppingcart.cart.domain.domain_events;
 
+import java.util.UUID;
+
 import org.bklvsc.shoppingcart.cart.domain.value_objects.CartId;
 import org.bklvsc.shoppingcart.cart.domain.value_objects.CartTotal;
 import org.bklvsc.shoppingcart.commons.domain.DomainEvent;
@@ -9,11 +11,10 @@ import org.bklvsc.shoppingcart.commons.valueobjects.FoodQuantity;
 import org.bklvsc.shoppingcart.commons.valueobjects.UserId;
 
 public sealed interface CartEvent extends DomainEvent{
-	public record CartCreatedEvent(CartId cartId, UserId userId) implements CartEvent{};
-	public record FoodAddedEvent(CartId cartId, FoodName food, FoodPrice price) implements CartEvent{};
-	public record QuantityUpdatedEvent(CartId cartId, FoodName food, FoodQuantity currentQuantity) implements CartEvent{};
-	public record FoodRemovedEvent(CartId cartId, FoodName food) implements CartEvent{};
-	public record CartTotalUpdatedEvent(CartId cartId, CartTotal cartTotal) implements CartEvent{};
-	public record CartDeletedEvent(CartId cartId) implements CartEvent{};
+	//public record CartCreatedEvent(UUID userId) implements CartEvent{};
+	public record FoodAddedEvent(UUID userId, String foodName, double price) implements CartEvent{};
+	public record QuantityUpdatedEvent(UUID userId, String food, int currentQuantity) implements CartEvent{};
+	public record FoodRemovedEvent(UUID userId, String food) implements CartEvent{};
+	public record CartTotalUpdatedEvent(UUID userId, double cartTotal) implements CartEvent{};
 }
 
